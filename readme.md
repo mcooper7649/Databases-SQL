@@ -270,3 +270,12 @@ INNER JOIN customers ON orders.customer_id = customers.id
 // Returns Order number from orders table, but firstname, lastname and address from customers table.
 ```
 
+## Challenge | Return a product the order was relating to using an INNER JOINß
+---
+
+
+```
+SELECT orders.order_number, products.name, products.price, products.stock
+FROM orders
+INNER JOIN products ON orders.product_id = products.id
+```
