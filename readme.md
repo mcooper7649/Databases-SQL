@@ -81,3 +81,66 @@ NOSQL =  Not Only Structured Query Language
 - SQL will outperform NoSQL in relationship queries
 - NoSQL is much more flexible and better for startups
 - SQL Scales Vertically, costs more, while NoSQL scales horizontally, cheaper.
+
+
+### Structure Query Language
+---
+
+[w3schools/sql](w3schools.com/sql)
+[sql-testingDB](https://sqliteonline.com/)  | Lets you get familiar with the language
+
+- With Every Single DB we have the things we will do to the data. CRUD is the acronym
+    - Create
+    - Read
+    - Update
+    - Destroy
+    
+- How to create a table to store int, string and store a monetary value, for price.
+```
+ CREATE TABLE products (
+    id INT,
+    name STRING,
+    price MONEY,
+   ....
+);
+
+```
+
+- Primary Keys will assign a unique id to an item in our table, in thix example the product. This primary key will only be assigned to the ID of this product, we will also add the NOT NULL so every product has to have an ID.
+
+## Scheme Creation for the products table
+---
+```
+ CREATE TABLE products (
+    id INT NOT NULL,
+    name STRING,
+    price MONEY,
+    PRIMARY KEY (id)
+   ....
+);
+
+```
+
+## Insert Data into Table
+---
+
+- If you are going to insert data for each and every column use insert code below
+
+```
+INSERT INTO products
+VALUES (1, "pen", 1.20)
+
+```
+
+- If you were to go to your products table and right click "Show table" you will now see your Pen we added
+
+
+- If you are going to insert data but we don't yet have the values for all the columns. You must specify the column in parenthesis that you do have values for.
+
+```
+INSERT INTO products (id, name)
+VALUES (2, "pencil")
+
+```
+
+- If you were to try to insert a product but don't specify the ID information, you will be prompted with "Not NULL" constraint error. Remember this is due to the schemea "NOT NULL" we assigned to the ID.
