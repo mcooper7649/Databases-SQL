@@ -110,8 +110,11 @@ NOSQL =  Not Only Structured Query Language
 
 ## Scheme Creation for the products table
 ---
+
+- Schema Format
+
 ```
- CREATE TABLE products (
+ CREATE TABLE products (   
     id INT NOT NULL,
     name STRING,
     price MONEY,
@@ -144,3 +147,126 @@ VALUES (2, "pencil")
 ```
 
 - If you were to try to insert a product but don't specify the ID information, you will be prompted with "Not NULL" constraint error. Remember this is due to the schemea "NOT NULL" we assigned to the ID.
+
+## Read, Select, Where
+---
+
+How to read the data from a SQL database
+
+```
+SELECT * FROM 'products';  // This returns all the columns from the prodcuts table
+
+SELECT name, price FROM 'products';  // This returns only the the columns we specified; name and price
+
+SELECT * FROM 'products' WHERE id=1;  // This returns all columns from products where the id is equal to 1.
+
+```
+
+## Updating Records in a SQL DB
+---
+
+
+How to update a product
+```
+UPDATE products   // Updates our products table or collection
+SET price = 0.80 // Sets the price column value to 0.80
+WHERE id = 2  // Specifies that where id=2 only will be updated
+```
+
+
+How to add a column 
+
+
+```
+ALTER TABLE table_name   // Example from w3 schools
+ADD column_name datatype;  // Example from w3 schools
+
+
+ALTER TABLE products  // How we would do it for our challenge
+ADD stock INT;  // How we would do it for our challenge
+
+```
+
+
+
+## Updating Records in a SQL DB Challenge
+---
+
+1. How would you update our pen and pencil so the pen has 32 stock and 12 for the pencil?
+
+```
+UPDATE products
+SET stock = 32
+WHERE id = 1  
+
+UPDATE products
+SET stock = 12
+WHERE id = 2
+
+```
+
+
+## Deleting Records in a SQL TABLE DB
+---
+
+```
+DELETE FROM table_name   // Example from w3
+WHERE condition;        // Example from w3
+
+DELETE FROM products  // Deletes ALL items from products table if no WHERE specified
+WHERE id = 2   // Specifies the ID we are deleteing, try to use ID when possible.
+```
+
+## Add Pencil Records Challenge
+---
+
+- Add the Pencil product we just deleted
+
+```
+
+INSERT INTO products
+VALUES (2, "pencil", 0.80, 12)
+
+```
+
+
+## Understanding SQL Relationships and Forgein Keys and Inner joins
+---
+
+- While the Primary Key lets you assign a column to create a unique ID, a FOREIGN key lets you link tables together.
+- In our table below our first foreign key is assigned to the customer_id column that REFERENCES the customers table (id) column. Making a relationship that can be referenced later.
+- In our table below our second foreign key is assigned to the product_id column that REFERENCES the products table (id) column. Making a relationship that can be referenced later.
+
+
+```
+CREATE TABLE orders(
+    id INT NOT NULL,
+    order_number INT,
+    customer_ID INT,
+    product_ID INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+    FOREIGN KEY (product_id) REFERENCES products(id)
+)
+```
+
+
+- Lets Insert our first order
+
+```
+INSERT INTO orders
+VALUES (1, 4362, 2, 1)
+
+```
+
+- Lets Inner JOIN our tables where a foreign key matches. This will allow us to access data that is connected via a foreign key
+
+
+```
+SELECT orders.order_number, customers.first_name, customers.last_name, customers.address
+FROM orders
+INNER JOIN customers ON orders.customer_id = customers.id
+
+// Returns Order number from orders table, but firstname, lastname and address from customers table.
+```
+
